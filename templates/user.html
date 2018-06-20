@@ -1,0 +1,58 @@
+{% extends 'users.html' %}
+
+{% block content %}
+<p>What are you doing here?!</p>
+
+<form action="" method="POST">
+  <div class='form-group'>
+    <img src="{{user.avatar_url}}" alt="">
+  </div>
+  <div class='form-group'>
+    <label for="firstName">First Name</label>
+    <input type="text" class='form-control' id='firstName' value='{{user.first_name}}'>
+    <small id="" class="form-text text-muted">STAHP!</small>
+  </div>
+  <div class='form-group'>
+    <label for="lastNmae">Last Name</label>
+    <input type="text" class='form-control' id='lastName' value='{{user.last_name}}'>
+    <small id="" class="form-text text-muted">GO BACK!</small>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id='email' aria-describedby="emailHelp" value="{{user.email}}">
+    <small id="" class="form-text text-muted">STAHP!</small>
+  </div>
+
+  <div class='form-group'>
+    <label for="lastNmae">Credit Card Number</label>
+    <input type="text" class='form-control' id='lastName' value='{{user.cc_number}}'>
+    <small id="" class="form-text text-muted">These aren't real credit card numbers!</small>
+  </div>
+  
+  <div class='form-group'>
+    <select class="form-inline">
+      {% if user.gender == 'Male' %}
+      <option selected value="Male">Male</option>
+      <option value="Female">Female</option>
+      {% else %}
+      <option value="Male">Male</option>
+      <option selected value="Female">Female</option>
+      {% endif %}
+    </select>
+
+  </div>
+  
+  <button type="submit" class="btn btn-warning btn-sm">Manipulate This User's Data!</button>
+  <form class='form-inline' action="" method="POST">
+    <button class='btn btn-danger btn-sm'>Delete This User!</button>
+  </form>
+      <small id="" class="form-text text-muted">You are an evil person!</small>
+      <br>
+</form>
+<a href="https://google.com">
+  <button class='btn btn-primary btn-sm'>Go back</button>
+        <small id="" class="form-text text-muted">And don't come back!</small>
+
+</a>
+
+{%endblock%}
