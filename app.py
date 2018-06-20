@@ -2,7 +2,6 @@ from flask import Flask, request, render_template, url_for, redirect
 from flask_modus import Modus
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
-from IPython import embed
 
 app = Flask(__name__)
 
@@ -38,17 +37,21 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    userid = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
+db.create_all()
 
 
 @app.route('/')
 def hey():
-    return 'Hey wrong route'
+    return 'Hey wrong route buddy'
 
 
 @app.route('/users')
 def users():
-    return render_template('users.html', users=User.query.limit(10).all())
+    return render_template(
+        'users.html', users=User.query.order_by(User.id).limit(20).all())
 
 
 @app.route('/users/<int:user_id>')
@@ -56,18 +59,63 @@ def show_user(user_id):
     return render_template('user.html', user=User.query.get(user_id))
 
 
+@app.route('/users/<int:user_id>', methods=["PATCH"])
+def edit_user(user_id):
+
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.email = request.form['email']
+    user.cc_number = request.form['cc_number']
+    user.gender = request.form['gender']
+    db.session.commit()
+
+    return redirect(url_for('users'))
+
+
+@app.route('/users/<int:user_id>', methods=["DELETE"])
+def delete_user(user_id):
+
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect(url_for('users'))
+
+
 @app.route('/users/<int:user_id>/messages')
 def show_user_messages(user_id):
     return render_template('messages.html', user=User.query.get(user_id))
 
 
-# jason = User(
-#     first_name='jason',
-#     last_name='hu',
-#     email='fbest0@joomla.org',
-#     cc_number='201900518399173',
-#     gender='male',
-#     avatar_url=
-#     'https://robohash.org/veltemporaquibusdam.png?size=100x100&set=set1')
-# db.session.add(jason)
-# db.session.commit()
+@app.route('/users/<int:user_id>/messages', methods=["POST"])
+def add_message_by_user(user_id):
+    message = Message(userid=user_id, content=request.form['message'])
+    db.session.add(message)
+    db.session.commit()
+    return redirect(url_for('show_user_messages', user_id=user_id))
+
+
+@app.route(
+    '/users/<int:user_id>/messages/<int:message_id>/edit', methods=["GET"])
+def edit_message_by_user(user_id, message_id):
+    message = Message.query.get_or_404(message_id)
+    return render_template(
+        'edit_message.html', message_id=message_id, message=message)
+
+
+@app.route('/users/<int:user_id>/messages/<int:message_id>', methods=["PATCH"])
+def update_message_by_user(user_id, message_id):
+    msg = Message.query.get_or_404(message_id)
+    msg.content = request.form['message']
+    db.session.commit()
+    return redirect(
+        url_for('show_user_messages', user_id=user_id, message_id=message_id))
+
+
+@app.route('/user/<int:user_id>/messages/<int:message_id>', methods=["DELETE"])
+def delete_message_by_user(user_id, message_id):
+    msg = Message.query.get_or_404(message_id)
+    db.session.delete(msg)
+    db.session.commit()
+    return redirect(url_for('show_user_messages', user_id=user_id))
