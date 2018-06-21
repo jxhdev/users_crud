@@ -1,12 +1,5 @@
-{% extends 'users.html' %}
-
-{% block content %}
-<h6>Stop snooping!!</h6>
-<a href="{{url_for('users')}}">
-  <button class='btn btn-primary btn-sm'>Go back</button>
-</a>
-<small id="" class="form-text text-muted">And don't come back!</small>
-
+{% extends 'users.html' %} {% block content %}
+<h6>Stop snooping on {{user.first_name}} {{user.last_name}}!!</h6>
 
 <form action="{{url_for('edit_user', user_id=user.id)}}?_method=PATCH" method="POST">
   <div class='form-group'>
@@ -33,7 +26,7 @@
     <input type="text" class='form-control' id='cc_number' name='cc_number' value='{{user.cc_number}}'>
     <small id="" class="form-text text-muted">These aren't real credit card numbers!</small>
   </div>
-  
+
   <div class='form-group'>
     <select class="form-inline" name='gender'>
       {% if user.gender == 'Male' %}
@@ -46,17 +39,16 @@
     </select>
 
   </div>
-  
+
   <button type="submit" class="btn btn-warning btn-sm">Manipulate This User's Data!</button>
-  
-      <br>
+
 </form>
-<form class='form-inline' action="{{url_for('delete_user', user_id=user.id)}}?_method=DELETE" method="POST">
-  <button class='btn btn-danger btn-sm'>Delete This User!</button>
-</form>
-
-<small id="" class="form-text text-muted">
-  You are an evil person!</small>
-
-
+<div class='mt-3'>
+  <a href="{{url_for('users')}}">
+    <button class='btn btn-primary btn-sm'>Go back</button>
+  </a>
+</div>
+<div>
+  <small id="" class="form-text text-muted">And don't come back!</small>
+</div>
 {%endblock%}

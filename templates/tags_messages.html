@@ -1,0 +1,28 @@
+{% extends 'users.html'%} {% block content %}
+<h6>All messages tagged
+  <span class='btn btn-sm btn-warning'>{{tag.content}}</span>
+</h6>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" class='col-1'>Message</th>
+      <th scope="col">Posted By</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for message in tag.messages %}
+
+    <tr>
+      <td>{{message.content}}</td>
+      <td>{{message.user.first_name}} {{message.user.last_name}}</td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+<a href="{{url_for('users')}}">
+  <button class='btn btn-primary btn-sm mt-3 mb-3'>Go back</button>
+</a>
+{% endblock %}

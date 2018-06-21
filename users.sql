@@ -1,25 +1,39 @@
-DROP DATABASE IF EXISTS users_crud;
-CREATE DATABASE users_crud;
+-- DROP DATABASE IF EXISTS users_crud;
+-- CREATE DATABASE users_crud;
 \c users_crud
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS messages;
+-- DROP TABLE IF EXISTS CASCADE users;
+-- DROP TABLE IF EXISTS CASCADE messages;
+-- DROP TABLE IF EXISTS tags;
+-- DROP TABLE IF EXISTS messages_tags;
 
-create table users (
-	id SERIAL PRIMARY KEY,
-	first_name VARCHAR(200),
-	last_name VARCHAR(200),
-	email VARCHAR(200),
-	cc_number VARCHAR(200),
-	gender VARCHAR(200),
-	avatar_url VARCHAR(200)
-);
 
-CREATE TABLE messages (
-  id SERIAL PRIMARY KEY,
-  content VARCHAR(500),
-  userID INT,
-  FOREIGN KEY (userID) REFERENCES users(id)
-);
+-- create table users (
+-- 	id SERIAL PRIMARY KEY,
+-- 	first_name VARCHAR(200),
+-- 	last_name VARCHAR(200),
+-- 	email VARCHAR(200),
+-- 	cc_number VARCHAR(200),
+-- 	gender VARCHAR(200),
+-- 	avatar_url VARCHAR(200)
+-- );
+
+-- CREATE TABLE messages (
+--   id SERIAL PRIMARY KEY,
+--   content VARCHAR(500),
+--   userID INT,
+--   FOREIGN KEY (userID) REFERENCES users(id)
+-- );
+
+-- CREATE TABLE tags (
+-- 	id SERIAL PRIMARY KEY,
+-- 	content VARCHAR(80)
+-- );
+
+-- CREATE TABLE messages_tags(
+-- 	id SERIAL PRIMARY KEY,
+-- 	message_id INT, FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE,
+-- 	tagID INT, FOREIGN KEY (tagID) REFERENCES tags(id) ON DELETE CASCADE
+-- );
 
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ('Franciska', 'Best', 'fbest0@joomla.org', '201900518399173', 'Female', 'https://robohash.org/veltemporaquibusdam.png?size=100x100&set=set1');
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ('Roddie', 'Eighteen', 'reighteen1@webeden.co.uk', '5100134027545552', 'Male', 'https://robohash.org/quiquiconsequatur.bmp?size=100x100&set=set1');
@@ -55,72 +69,7 @@ insert into users (first_name, last_name, email, cc_number, gender, avatar_url) 
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Abram', 'O'' Molan', 'aomolanv@pen.io', '30253314918268', 'Male', 'https://robohash.org/laborumipsavoluptatem.bmp?size=100x100&set=set1');
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Petronella', 'Puncher', 'ppuncherw@privacy.gov.au', '5602236936206649', 'Female', 'https://robohash.org/quisitet.png?size=100x100&set=set1');
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Sapphira', 'Lesor', 'slesorx@over-blog.com', '3579960176860518', 'Female', 'https://robohash.org/autnumquamnon.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Neala', 'Guilford', 'nguilfordy@over-blog.com', '3552730970866693', 'Female', 'https://robohash.org/iustoinventoreaperiam.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Launce', 'Lyard', 'llyardz@wired.com', '3558685853274502', 'Male', 'https://robohash.org/consecteturquodolores.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Lory', 'Whitear', 'lwhitear10@apache.org', '374288385381214', 'Female', 'https://robohash.org/nonsintpossimus.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Jobina', 'Plover', 'jplover11@squarespace.com', '3531892769383441', 'Female', 'https://robohash.org/delectuspariaturlabore.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Jessy', 'Fernez', 'jfernez12@illinois.edu', '3545583429399018', 'Female', 'https://robohash.org/illumillocorporis.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Demetri', 'Mohammad', 'dmohammad13@behance.net', '3550822159557227', 'Male', 'https://robohash.org/omnisquiquia.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Stacia', 'Hunnam', 'shunnam14@joomla.org', '374283186133005', 'Female', 'https://robohash.org/autiureet.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Anny', 'Cockran', 'acockran15@e-recht24.de', '564182855870296284', 'Female', 'https://robohash.org/sintculpanisi.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Bone', 'Elkins', 'belkins16@shinystat.com', '4026698020512292', 'Male', 'https://robohash.org/eafacilisminima.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Rickey', 'Jefferson', 'rjefferson17@cmu.edu', '6763159104618614', 'Male', 'https://robohash.org/reiciendisdolorumnumquam.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Pierre', 'Borton', 'pborton18@list-manage.com', '3555621325548036', 'Male', 'https://robohash.org/voluptatemvoluptatemodi.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Lloyd', 'Kores', 'lkores19@mit.edu', '4041591179091294', 'Male', 'https://robohash.org/accusamusautporro.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Cyrus', 'Milesop', 'cmilesop1a@hc360.com', '3547252847816239', 'Male', 'https://robohash.org/consecteturbeataeaccusamus.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Heda', 'Jennick', 'hjennick1b@jugem.jp', '3556551435139195', 'Female', 'https://robohash.org/nonnihilmolestias.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Erminie', 'Doerling', 'edoerling1c@unicef.org', '201457589321115', 'Female', 'https://robohash.org/repudiandaeetvoluptatum.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Viva', 'Harbinson', 'vharbinson1d@t.co', '5038634418691946', 'Female', 'https://robohash.org/ducimustemporibusipsam.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Ulick', 'McVie', 'umcvie1e@taobao.com', '36309285825058', 'Male', 'https://robohash.org/autestet.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Bernardo', 'Bodleigh', 'bbodleigh1f@redcross.org', '5002354378468977', 'Male', 'https://robohash.org/velrepellatporro.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Tamara', 'Narramor', 'tnarramor1g@slate.com', '3564122913268649', 'Female', 'https://robohash.org/eaqueullamerror.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Karel', 'Mattussevich', 'kmattussevich1h@youku.com', '372301600142063', 'Male', 'https://robohash.org/undeutaccusamus.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Marne', 'Smalles', 'msmalles1i@pcworld.com', '502039974739761142', 'Female', 'https://robohash.org/molestiaesuntbeatae.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Ashlin', 'MacConnulty', 'amacconnulty1j@google.ca', '564182793861631799', 'Male', 'https://robohash.org/aliasullamut.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Gunilla', 'Langeley', 'glangeley1k@blogs.com', '4913771890197126', 'Female', 'https://robohash.org/doloremquedebitispraesentium.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Nehemiah', 'Shervil', 'nshervil1l@privacy.gov.au', '3570400851101010', 'Male', 'https://robohash.org/aperiamvoluptatemcumque.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Hyacinth', 'Colleck', 'hcolleck1m@rediff.com', '3574243715928657', 'Female', 'https://robohash.org/estsintnumquam.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Sly', 'Sangra', 'ssangra1n@chicagotribune.com', '3566298833649627', 'Male', 'https://robohash.org/ullamvoluptatesalias.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Caterina', 'Vickress', 'cvickress1o@fda.gov', '6759385335898917497', 'Female', 'https://robohash.org/rerumofficiavel.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Gennie', 'Marston', 'gmarston1p@independent.co.uk', '3533959750141464', 'Female', 'https://robohash.org/praesentiumfugaquia.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Hamnet', 'McKeown', 'hmckeown1q@xrea.com', '3565961820772006', 'Male', 'https://robohash.org/evenietexcepturiea.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Clemmie', 'Gladman', 'cgladman1r@delicious.com', '3555918207879053', 'Male', 'https://robohash.org/utsedet.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Daisi', 'Hebbron', 'dhebbron1s@360.cn', '3580577973892366', 'Female', 'https://robohash.org/dolornamminus.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Rosalie', 'Stollsteimer', 'rstollsteimer1t@usgs.gov', '3557993971613598', 'Female', 'https://robohash.org/impeditmaximeeveniet.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Mallissa', 'Parnell', 'mparnell1u@github.com', '3558285604435369', 'Female', 'https://robohash.org/repellatullamut.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Selestina', 'Adelberg', 'sadelberg1v@is.gd', '30595868448385', 'Female', 'https://robohash.org/faciliseumest.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Tannie', 'Neeson', 'tneeson1w@printfriendly.com', '6763502257822123473', 'Male', 'https://robohash.org/etrerumminus.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Elizabeth', 'Grangier', 'egrangier1x@mapy.cz', '201869602547478', 'Female', 'https://robohash.org/aliquirerum.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Tiff', 'Giuroni', 'tgiuroni1y@t-online.de', '3573529936098143', 'Female', 'https://robohash.org/estautnostrum.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Gerianne', 'Bessom', 'gbessom1z@pbs.org', '6334491250398331', 'Female', 'https://robohash.org/adipiscicumqueporro.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Neille', 'Points', 'npoints20@ocn.ne.jp', '3545798272891339', 'Female', 'https://robohash.org/solutamaioresrem.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Hew', 'Briance', 'hbriance21@t-online.de', '5124699739262763', 'Male', 'https://robohash.org/et.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Ruprecht', 'Ferebee', 'rferebee22@youku.com', '3534360391199939', 'Male', 'https://robohash.org/quoutdistinctio.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Jefferson', 'Jossel', 'jjossel23@multiply.com', '6397986359548706', 'Male', 'https://robohash.org/nobisdistinctioenim.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Scottie', 'Cordero', 'scordero24@google.co.jp', '3584081163567728', 'Male', 'https://robohash.org/namestsed.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Nettie', 'Geeraert', 'ngeeraert25@spotify.com', '3575575618388946', 'Female', 'https://robohash.org/voluptassequiesse.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Brewer', 'MacAdam', 'bmacadam26@buzzfeed.com', '201473880864216', 'Male', 'https://robohash.org/veritatisexercitationemea.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Bjorn', 'Sherland', 'bsherland27@photobucket.com', '4917182023819113', 'Male', 'https://robohash.org/sitoccaecatirerum.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Rickert', 'Routley', 'rroutley28@icio.us', '201910900631836', 'Male', 'https://robohash.org/voluptatemeosad.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Genna', 'Pavlenko', 'gpavlenko29@noaa.gov', '560222306927590121', 'Female', 'https://robohash.org/nonconsequaturculpa.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Mead', 'Mapother', 'mmapother2a@drupal.org', '3551224308443954', 'Male', 'https://robohash.org/esteasimilique.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Dorey', 'Van der Hoven', 'dvanderhoven2b@cnbc.com', '3584016868633755', 'Male', 'https://robohash.org/nemodignissimosautem.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Roxy', 'Querree', 'rquerree2c@stanford.edu', '5641828014191389', 'Female', 'https://robohash.org/reiciendisetest.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Lefty', 'Crampsy', 'lcrampsy2d@foxnews.com', '6396738975141858', 'Male', 'https://robohash.org/enimipsamest.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Benedetto', 'Tranfield', 'btranfield2e@virginia.edu', '3544178467138310', 'Male', 'https://robohash.org/aliqutaut.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Gaile', 'Collar', 'gcollar2f@yale.edu', '4017950866482101', 'Male', 'https://robohash.org/doloribusnobisillum.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Felicity', 'Phuprate', 'fphuprate2g@dyndns.org', '6762011089425096', 'Female', 'https://robohash.org/cumqueetnon.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Frank', 'Longden', 'flongden2h@mysql.com', '3581525873513359', 'Female', 'https://robohash.org/distinctioinctquam.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Standford', 'Andrewartha', 'sandrewartha2i@istockphoto.com', '3530767653410883', 'Male', 'https://robohash.org/necessitatibusdoloremqueullam.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Jemimah', 'Tremellier', 'jtremellier2j@miibeian.gov.cn', '3550910103979843', 'Female', 'https://robohash.org/eosconsecteturautem.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Noll', 'Newcomb', 'nnewcomb2k@oracle.com', '5610901518743570', 'Male', 'https://robohash.org/ametdolorumcorrupti.bmp?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Deboara', 'Dilliston', 'ddilliston2l@ted.com', '3569151434035216', 'Female', 'https://robohash.org/molestiaeeosculpa.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Margaretta', 'Soitoux', 'msoitoux2m@gmpg.org', '67596428632714137', 'Female', 'https://robohash.org/etexplicaborerum.jpg?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Carny', 'Lydster', 'clydster2n@tinypic.com', '30494170792732', 'Male', 'https://robohash.org/etiustonemo.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Fionnula', 'Leve', 'fleve2o@fema.gov', '201748958180698', 'Female', 'https://robohash.org/etquiasaepe.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Orville', 'Sparrowe', 'osparrowe2p@elpais.com', '3564752767731787', 'Male', 'https://robohash.org/quosundenihil.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ( 'Salomo', 'Seabourne', 'sseabourne2q@theguardian.com', '3557426944681475', 'Male', 'https://robohash.org/corporisnobissaepe.png?size=100x100&set=set1');
-insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ('Bryant', 'McMullen', 'bmcmullen2r@rediff.com', '5425176768604799', 'Male', 'https://robohash.org/harumlaboriosamenim.png?size=100x100&set=set1');
+
 
 
 insert into messages (content, userID) values ('Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', 6);
@@ -173,3 +122,194 @@ insert into messages (content, userID) values ( 'Phasellus in felis. Donec sempe
 insert into messages (content, userID) values ( 'Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.', 16);
 insert into messages (content, userID) values ( 'Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', 17);
 insert into messages (content, userID) values ( 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.', 15);
+
+insert into tags (content) values ('full-range');
+insert into tags (content) values ('Decentralized');
+insert into tags (content) values ('Adaptive');
+insert into tags (content) values ('De-engineered');
+insert into tags (content) values ('initiative');
+insert into tags (content) values ('coherent');
+insert into tags (content) values ('encompassing');
+insert into tags (content) values ('emulation');
+insert into tags (content) values ('Proactive');
+insert into tags (content) values ('high-level');
+insert into tags (content) values ('alliance');
+insert into tags (content) values ('secondary');
+insert into tags (content) values ('challenge');
+insert into tags (content) values ('Monitored');
+insert into tags (content) values ('Enterprise-wide');
+insert into tags (content) values ('approach');
+insert into tags (content) values ('Fully-configurable');
+insert into tags (content) values ('help-desk');
+insert into tags (content) values ('User-centric');
+insert into tags (content) values ('Multi-lateral');
+
+insert into messages_tags (message_id, tag_id) values (38, 11);
+insert into messages_tags (message_id, tag_id) values (36, 14);
+insert into messages_tags (message_id, tag_id) values (10, 16);
+insert into messages_tags (message_id, tag_id) values (21, 5);
+insert into messages_tags (message_id, tag_id) values (35, 12);
+insert into messages_tags (message_id, tag_id) values (11, 17);
+insert into messages_tags (message_id, tag_id) values (39, 16);
+insert into messages_tags (message_id, tag_id) values (44, 3);
+insert into messages_tags (message_id, tag_id) values (19, 15);
+insert into messages_tags (message_id, tag_id) values (9, 11);
+insert into messages_tags (message_id, tag_id) values (12, 8);
+insert into messages_tags (message_id, tag_id) values (25, 3);
+insert into messages_tags (message_id, tag_id) values (2, 6);
+insert into messages_tags (message_id, tag_id) values (25, 2);
+insert into messages_tags (message_id, tag_id) values (46, 14);
+insert into messages_tags (message_id, tag_id) values (17, 1);
+insert into messages_tags (message_id, tag_id) values (38, 16);
+insert into messages_tags (message_id, tag_id) values (22, 5);
+insert into messages_tags (message_id, tag_id) values (47, 17);
+insert into messages_tags (message_id, tag_id) values (48, 19);
+insert into messages_tags (message_id, tag_id) values (1, 14);
+insert into messages_tags (message_id, tag_id) values (2, 13);
+insert into messages_tags (message_id, tag_id) values (3, 4);
+insert into messages_tags (message_id, tag_id) values (4, 17);
+insert into messages_tags (message_id, tag_id) values (5, 19);
+insert into messages_tags (message_id, tag_id) values (6, 16);
+insert into messages_tags (message_id, tag_id) values (7, 8);
+insert into messages_tags (message_id, tag_id) values (8, 4);
+insert into messages_tags (message_id, tag_id) values (9, 12);
+insert into messages_tags (message_id, tag_id) values (10, 5);
+insert into messages_tags (message_id, tag_id) values (11, 18);
+insert into messages_tags (message_id, tag_id) values (12, 2);
+insert into messages_tags (message_id, tag_id) values (13, 16);
+insert into messages_tags (message_id, tag_id) values (14, 10);
+insert into messages_tags (message_id, tag_id) values (15, 12);
+insert into messages_tags (message_id, tag_id) values (16, 9);
+insert into messages_tags (message_id, tag_id) values (17, 10);
+insert into messages_tags (message_id, tag_id) values (18, 11);
+insert into messages_tags (message_id, tag_id) values (19, 10);
+insert into messages_tags (message_id, tag_id) values (20, 8);
+insert into messages_tags (message_id, tag_id) values (21, 9);
+insert into messages_tags (message_id, tag_id) values (22, 15);
+insert into messages_tags (message_id, tag_id) values (23, 13);
+insert into messages_tags (message_id, tag_id) values (24, 1);
+insert into messages_tags (message_id, tag_id) values (25, 20);
+insert into messages_tags (message_id, tag_id) values (26, 16);
+insert into messages_tags (message_id, tag_id) values (27, 7);
+insert into messages_tags (message_id, tag_id) values (28, 3);
+insert into messages_tags (message_id, tag_id) values (29, 19);
+insert into messages_tags (message_id, tag_id) values (30, 8);
+insert into messages_tags (message_id, tag_id) values (31, 20);
+insert into messages_tags (message_id, tag_id) values (32, 1);
+insert into messages_tags (message_id, tag_id) values (33, 2);
+insert into messages_tags (message_id, tag_id) values (34, 9);
+insert into messages_tags (message_id, tag_id) values (35, 8);
+insert into messages_tags (message_id, tag_id) values (36, 5);
+insert into messages_tags (message_id, tag_id) values (37, 17);
+insert into messages_tags (message_id, tag_id) values (38, 1);
+insert into messages_tags (message_id, tag_id) values (39, 15);
+insert into messages_tags (message_id, tag_id) values (40, 7);
+insert into messages_tags (message_id, tag_id) values (41, 20);
+insert into messages_tags (message_id, tag_id) values (42, 15);
+insert into messages_tags (message_id, tag_id) values (43, 10);
+insert into messages_tags (message_id, tag_id) values (44, 6);
+insert into messages_tags (message_id, tag_id) values (45, 3);
+insert into messages_tags (message_id, tag_id) values (46, 7);
+insert into messages_tags (message_id, tag_id) values (47, 12);
+insert into messages_tags (message_id, tag_id) values (48, 20);
+insert into messages_tags (message_id, tag_id) values (49, 9);
+insert into messages_tags (message_id, tag_id) values (1, 7);
+insert into messages_tags (message_id, tag_id) values (2, 13);
+insert into messages_tags (message_id, tag_id) values (3, 18);
+insert into messages_tags (message_id, tag_id) values (4, 1);
+insert into messages_tags (message_id, tag_id) values (5, 11);
+insert into messages_tags (message_id, tag_id) values (6, 18);
+insert into messages_tags (message_id, tag_id) values (7, 20);
+insert into messages_tags (message_id, tag_id) values (8, 14);
+insert into messages_tags (message_id, tag_id) values (9, 16);
+insert into messages_tags (message_id, tag_id) values (10, 19);
+insert into messages_tags (message_id, tag_id) values (11, 4);
+insert into messages_tags (message_id, tag_id) values (12, 18);
+insert into messages_tags (message_id, tag_id) values (13, 17);
+insert into messages_tags (message_id, tag_id) values (14, 9);
+insert into messages_tags (message_id, tag_id) values (15, 19);
+insert into messages_tags (message_id, tag_id) values (16, 5);
+insert into messages_tags (message_id, tag_id) values (17, 11);
+insert into messages_tags (message_id, tag_id) values (18, 6);
+insert into messages_tags (message_id, tag_id) values (19, 16);
+insert into messages_tags (message_id, tag_id) values (20, 20);
+insert into messages_tags (message_id, tag_id) values (21, 19);
+insert into messages_tags (message_id, tag_id) values (22, 12);
+insert into messages_tags (message_id, tag_id) values (23, 20);
+insert into messages_tags (message_id, tag_id) values (24, 19);
+insert into messages_tags (message_id, tag_id) values (25, 4);
+insert into messages_tags (message_id, tag_id) values (26, 4);
+insert into messages_tags (message_id, tag_id) values (27, 14);
+insert into messages_tags (message_id, tag_id) values (28, 20);
+insert into messages_tags (message_id, tag_id) values (29, 5);
+insert into messages_tags (message_id, tag_id) values (30, 5);
+insert into messages_tags (message_id, tag_id) values (31, 8);
+insert into messages_tags (message_id, tag_id) values (32, 18);
+insert into messages_tags (message_id, tag_id) values (33, 20);
+insert into messages_tags (message_id, tag_id) values (34, 19);
+insert into messages_tags (message_id, tag_id) values (35, 16);
+insert into messages_tags (message_id, tag_id) values (36, 8);
+insert into messages_tags (message_id, tag_id) values (37, 15);
+insert into messages_tags (message_id, tag_id) values (38, 6);
+insert into messages_tags (message_id, tag_id) values (39, 15);
+insert into messages_tags (message_id, tag_id) values (40, 5);
+insert into messages_tags (message_id, tag_id) values (41, 20);
+insert into messages_tags (message_id, tag_id) values (42, 13);
+insert into messages_tags (message_id, tag_id) values (43, 13);
+insert into messages_tags (message_id, tag_id) values (44, 12);
+insert into messages_tags (message_id, tag_id) values (45, 20);
+insert into messages_tags (message_id, tag_id) values (46, 1);
+insert into messages_tags (message_id, tag_id) values (47, 15);
+insert into messages_tags (message_id, tag_id) values (48, 20);
+insert into messages_tags (message_id, tag_id) values (49, 16);
+insert into messages_tags (message_id, tag_id) values (50, 10);
+insert into messages_tags (message_id, tag_id) values (1, 7);
+insert into messages_tags (message_id, tag_id) values (2, 13);
+insert into messages_tags (message_id, tag_id) values (3, 18);
+insert into messages_tags (message_id, tag_id) values (4, 1);
+insert into messages_tags (message_id, tag_id) values (5, 11);
+insert into messages_tags (message_id, tag_id) values (6, 18);
+insert into messages_tags (message_id, tag_id) values (7, 20);
+insert into messages_tags (message_id, tag_id) values (8, 14);
+insert into messages_tags (message_id, tag_id) values (9, 16);
+insert into messages_tags (message_id, tag_id) values (10, 19);
+insert into messages_tags (message_id, tag_id) values (11, 4);
+insert into messages_tags (message_id, tag_id) values (12, 18);
+insert into messages_tags (message_id, tag_id) values (13, 17);
+insert into messages_tags (message_id, tag_id) values (14, 9);
+insert into messages_tags (message_id, tag_id) values (15, 19);
+insert into messages_tags (message_id, tag_id) values (16, 5);
+insert into messages_tags (message_id, tag_id) values (17, 11);
+insert into messages_tags (message_id, tag_id) values (18, 6);
+insert into messages_tags (message_id, tag_id) values (19, 16);
+insert into messages_tags (message_id, tag_id) values (20, 20);
+insert into messages_tags (message_id, tag_id) values (21, 19);
+insert into messages_tags (message_id, tag_id) values (22, 12);
+insert into messages_tags (message_id, tag_id) values (23, 20);
+insert into messages_tags (message_id, tag_id) values (24, 19);
+insert into messages_tags (message_id, tag_id) values (25, 4);
+insert into messages_tags (message_id, tag_id) values (26, 4);
+insert into messages_tags (message_id, tag_id) values (27, 14);
+insert into messages_tags (message_id, tag_id) values (28, 20);
+insert into messages_tags (message_id, tag_id) values (29, 5);
+insert into messages_tags (message_id, tag_id) values (30, 5);
+insert into messages_tags (message_id, tag_id) values (31, 8);
+insert into messages_tags (message_id, tag_id) values (32, 18);
+insert into messages_tags (message_id, tag_id) values (33, 20);
+insert into messages_tags (message_id, tag_id) values (34, 19);
+insert into messages_tags (message_id, tag_id) values (35, 16);
+insert into messages_tags (message_id, tag_id) values (36, 8);
+insert into messages_tags (message_id, tag_id) values (37, 15);
+insert into messages_tags (message_id, tag_id) values (38, 6);
+insert into messages_tags (message_id, tag_id) values (39, 15);
+insert into messages_tags (message_id, tag_id) values (40, 5);
+insert into messages_tags (message_id, tag_id) values (41, 20);
+insert into messages_tags (message_id, tag_id) values (42, 13);
+insert into messages_tags (message_id, tag_id) values (43, 13);
+insert into messages_tags (message_id, tag_id) values (44, 12);
+insert into messages_tags (message_id, tag_id) values (45, 20);
+insert into messages_tags (message_id, tag_id) values (46, 1);
+insert into messages_tags (message_id, tag_id) values (47, 15);
+insert into messages_tags (message_id, tag_id) values (48, 20);
+insert into messages_tags (message_id, tag_id) values (49, 16);
+insert into messages_tags (message_id, tag_id) values (50, 10);

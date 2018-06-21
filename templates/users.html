@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
   <title>U HACKED THIS DB</title>
 </head>
 <div class='container'>
-<h1>You are the pro hacker!</h1>
-{% block content %}
-<h6>How did you get into this database with real<sup>*</sup> credit card numbers?</h6>
+  <h1 class='text-center'>You are the pro hacker!</h1>
+  {% block content %}
+  <h6>How did you get into this database with real
+    <sup>*</sup> credit card numbers?</h6>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope='col'>
-        Avatar</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">email</th>
-      <th scope='col'>Credit Card Number</th>
-      <th scope='col'>Gender</th>
-      <th scope='col'>
-        Action</th>
-      <th scope='col'>Messages</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <tr>
-
-      {% for user in users%}
-      <th scope="row">{{user.id}}</th>
-      <td>
-        <img src="{{user.avatar_url}}" alt="">
-      </td>
-      <td>{{user.first_name}}</td>
-      <td>{{user.last_name}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.cc_number}}</td>
-      <td>{{user.gender}}</td>
-      <td>
-        <a href="{{ url_for('show_user', user_id=user.id) }}"><button class='btn-sm'>Edit</button></a>
-      </td>
-
-      <td><a href="{{url_for('show_user_messages', user_id=user.id)}}">Don't Read These Very Private Messages!</a></td>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope='col'>
+          Avatar</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Action</th>
+        <th scope='col'>Messages</th>
       </tr>
-     {% endfor %}
+    </thead>
+    <tbody>
 
-  </tbody>
-</table>
+      <tr>
 
-{% endblock %}
+        {% for user in users%}
+        <th scope="row">{{user.id}}</th>
+        <td>
+          <img src="{{user.avatar_url}}" alt="">
+        </td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+
+        <td>
+          <form>
+            <button formaction="{{ url_for('show_user', user_id=user.id) }}" formmethod='GET' class='btn-sm mb-3'>Edit</button>
+            <button class='btn btn-danger btn-sm' formaction="{{url_for('delete_user', user_id=user.id)}}?_method=DELETE" formmethod="POST">Delete</button>
+          </form>
+        </td>
+
+        <td>
+          <a href="{{url_for('show_user_messages', user_id=user.id)}}">Don't Read These Very Private Messages!</a>
+        </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+  {% endblock %}
 
 </div>
 
 <body>
-  
+
 </body>
+
 </html>

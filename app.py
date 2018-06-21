@@ -28,6 +28,7 @@ class User(db.Model):
     cc_number = db.Column(db.Text)
     gender = db.Column(db.Text)
     avatar_url = db.Column(db.Text)
+
     messages = db.relationship("Message", backref="user")
 
 
@@ -39,6 +40,23 @@ class Message(db.Model):
     content = db.Column(db.Text)
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+    tags = db.relationship(
+        'Tag', secondary='messages_tags', backref=db.backref('messages'))
+
+
+class Tag(db.Model):
+
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+
+
+messages_tags = db.Table(
+    'messages_tags', db.Column('id', db.Integer, primary_key=True),
+    db.Column('message_id', db.Integer, db.ForeignKey('messages.id')),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')),
+    db.UniqueConstraint('message_id', 'tag_id', name='uniq'))
 
 db.create_all()
 
@@ -85,12 +103,16 @@ def delete_user(user_id):
 
 @app.route('/users/<int:user_id>/messages')
 def show_user_messages(user_id):
-    return render_template('messages.html', user=User.query.get(user_id))
+    user = User.query.get(user_id)
+    tag = Tag.query.all()
+    return render_template('messages.html', user=user, tags=tag)
 
 
 @app.route('/users/<int:user_id>/messages', methods=["POST"])
 def add_message_by_user(user_id):
     message = Message(userid=user_id, content=request.form['message'])
+    tag_ids = request.form.getlist('tags')
+    message.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
     db.session.add(message)
     db.session.commit()
     return redirect(url_for('show_user_messages', user_id=user_id))
@@ -100,8 +122,7 @@ def add_message_by_user(user_id):
     '/users/<int:user_id>/messages/<int:message_id>/edit', methods=["GET"])
 def edit_message_by_user(user_id, message_id):
     message = Message.query.get_or_404(message_id)
-    return render_template(
-        'edit_message.html', message_id=message_id, message=message)
+    return render_template('edit_message.html', message=message)
 
 
 @app.route('/users/<int:user_id>/messages/<int:message_id>', methods=["PATCH"])
@@ -113,9 +134,16 @@ def update_message_by_user(user_id, message_id):
         url_for('show_user_messages', user_id=user_id, message_id=message_id))
 
 
-@app.route('/user/<int:user_id>/messages/<int:message_id>', methods=["DELETE"])
+@app.route(
+    '/users/<int:user_id>/messages/<int:message_id>', methods=["DELETE"])
 def delete_message_by_user(user_id, message_id):
     msg = Message.query.get_or_404(message_id)
     db.session.delete(msg)
     db.session.commit()
     return redirect(url_for('show_user_messages', user_id=user_id))
+
+
+@app.route('/messages/tags/<int:tag_id>')
+def show_messages_by_tags(tag_id):
+    tag = Tag.query.get(tag_id)
+    return render_template('tags_messages.html', tag=tag)
