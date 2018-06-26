@@ -1,39 +1,6 @@
 -- DROP DATABASE IF EXISTS users_crud;
 -- CREATE DATABASE users_crud;
 \c users_crud
--- DROP TABLE IF EXISTS CASCADE users;
--- DROP TABLE IF EXISTS CASCADE messages;
--- DROP TABLE IF EXISTS tags;
--- DROP TABLE IF EXISTS messages_tags;
-
-
--- create table users (
--- 	id SERIAL PRIMARY KEY,
--- 	first_name VARCHAR(200),
--- 	last_name VARCHAR(200),
--- 	email VARCHAR(200),
--- 	cc_number VARCHAR(200),
--- 	gender VARCHAR(200),
--- 	avatar_url VARCHAR(200)
--- );
-
--- CREATE TABLE messages (
---   id SERIAL PRIMARY KEY,
---   content VARCHAR(500),
---   userID INT,
---   FOREIGN KEY (userID) REFERENCES users(id)
--- );
-
--- CREATE TABLE tags (
--- 	id SERIAL PRIMARY KEY,
--- 	content VARCHAR(80)
--- );
-
--- CREATE TABLE messages_tags(
--- 	id SERIAL PRIMARY KEY,
--- 	message_id INT, FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE,
--- 	tagID INT, FOREIGN KEY (tagID) REFERENCES tags(id) ON DELETE CASCADE
--- );
 
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ('Franciska', 'Best', 'fbest0@joomla.org', '201900518399173', 'Female', 'https://robohash.org/veltemporaquibusdam.png?size=100x100&set=set1');
 insert into users (first_name, last_name, email, cc_number, gender, avatar_url) values ('Roddie', 'Eighteen', 'reighteen1@webeden.co.uk', '5100134027545552', 'Male', 'https://robohash.org/quiquiconsequatur.bmp?size=100x100&set=set1');

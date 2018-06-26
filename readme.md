@@ -20,18 +20,24 @@ workon user_crud
 pip install -r requirements.txt
 ```
 
-Should work out of the box but it's pretty barebones so seed the data in users.sql
+Create db in shell
+
+```
+createdb users_crud
+```
+
+Run flask from venv to create the models
+
+```
+flask run
+```
+
+Should work out of the box but it's pretty barebones so you can seed the data from users.sql. Run flask first to create the models first.
 
 In shell
 
 ```sh
 psql < users.sql
-```
-
-Run flask from venv
-
-```
-flask run
 ```
 
 Connect to `localhost:FLASK_PORT_NUMBER` in your browser
@@ -45,6 +51,7 @@ python test_app.py
 ## Built With
 
 - Flask
+- PostgreSQL
 - SQLAlchemy
 
 ## Authors
