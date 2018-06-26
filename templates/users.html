@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="main.css">
   <title>U HACKED THIS DB</title>
 </head>
+
+<body>
 <div class='container'>
   <h1 class='text-center'>You are the pro hacker!</h1>
   {% block content %}
@@ -55,13 +57,14 @@
 
     </tbody>
   </table>
-
+  <div>
+    <a class='btn-secondary btn' href="{{url_for('show_create_user_page')}}">Create User</a>
+  </div>
+  </div>
   {% endblock %}
 
-</div>
-
-<body>
-
+ 
 </body>
+<footer><br></footer>
 
 </html>

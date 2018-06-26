@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'ihaveasecret'
 modus = Modus(app)
-toolbar = DebugToolbarExtension(app)
+# toolbar = DebugToolbarExtension(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users_crud"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -63,13 +63,33 @@ db.create_all()
 
 @app.route('/')
 def hey():
-    return 'Hey wrong route buddy'
+    return redirect(url_for('show_all_users'))
 
 
 @app.route('/users')
-def users():
+def show_all_users():
     return render_template(
-        'users.html', users=User.query.order_by(User.id).limit(20).all())
+        'users.html', users=User.query.order_by(User.id).all())
+
+
+@app.route('/users/add', methods=['GET'])
+def show_create_user_page():
+    return render_template('create_user.html')
+
+
+@app.route('/users', methods=["POST"])
+def create_user():
+    user = User(
+        avatar_url=request.form['avatar_url'],
+        first_name=request.form['first_name'],
+        last_name=request.form['last_name'],
+        email=request.form['email'],
+        cc_number=request.form['cc_number'],
+        gender=request.form['gender'])
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect(url_for('show_all_users'))
 
 
 @app.route('/users/<int:user_id>')
@@ -88,7 +108,7 @@ def edit_user(user_id):
     user.gender = request.form['gender']
     db.session.commit()
 
-    return redirect(url_for('users'))
+    return redirect(url_for('show_all_users'))
 
 
 @app.route('/users/<int:user_id>', methods=["DELETE"])
@@ -98,7 +118,7 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
 
-    return redirect(url_for('users'))
+    return redirect(url_for('show_all_users'))
 
 
 @app.route('/users/<int:user_id>/messages')
