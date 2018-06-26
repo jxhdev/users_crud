@@ -15,8 +15,8 @@ pip install -r requirements.txt
 Make a virtualenv
 
 ```python
-mkvirtualenv user_crud
-workon user_crud
+mkvirtualenv users_crud
+workon users_crud
 pip install -r requirements.txt
 ```
 
